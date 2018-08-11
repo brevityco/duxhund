@@ -5,10 +5,10 @@ import createReducer from './createReducer'
 
 export default function createStore({
   reducers = {},
-  state = {},
+  initialState = {},
   middleware = [],
 } = {}) {
   const reducer = createReducer(reducers)
   const withMiddleware = applyMiddleware(...middleware, thunk)
-  return withMiddleware(createReduxStore)(reducer, state)
+  return withMiddleware(createReduxStore)(reducer, initialState)
 }
