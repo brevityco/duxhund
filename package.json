@@ -33,10 +33,13 @@
     "babel-eslint": "^8.2.6",
     "prettier": "^1.14.2",
     "rollup": "^0.64.1",
-    "rollup-plugin-babel": "4.0.0-beta.8",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^4.0.0"
+    "rollup-plugin-babel": "4.0.0-beta.8"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "peerDependencies": {
+    "immer": ">=1.5.0",
+    "react-redux": ">=5.0.7",
+    "redux": ">=4.0.0",
+    "redux-thunk": ">=2.3.0"
+  }
 }
