@@ -17,7 +17,10 @@ export default function createConnect({
       queries = queries[0]
     }
 
-    const selectors = queries.flatMap(query => createSelector(query))
+    const selectors = [].concat.apply(
+      [],
+      queries.map(query => createSelector(query))
+    )
 
     const connector = reduxConnect(
       (state, ownProps) =>
