@@ -1,6 +1,8 @@
-import createStore from './createStore'
-import createConnect from './createConnect'
 import createActions from './createActions'
+import createConnect from './createConnect'
+import createReducer from './createReducer'
+import createSelector from './createSelector'
+import createStore from './createStore'
 
 export default function remux(options = {}) {
   options = {
