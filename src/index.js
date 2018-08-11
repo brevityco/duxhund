@@ -2,7 +2,7 @@ import createStore from './createStore'
 import createConnect from './createConnect'
 import createActions from './createActions'
 
-export default function dux(options = {}) {
+export default function remux(options = {}) {
   options = {
     actions: {},
     reducers: {},
