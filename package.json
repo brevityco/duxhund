@@ -1,0 +1,42 @@
+{
+  "name": "remux",
+  "version": "0.0.1",
+  "description": "A opinionated and simplified interface for Redux",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "github:brevityco/remux"
+  },
+  "bugs": "https://github.com/brevityco/remux/issues",
+  "files": ["lib", "es", "src"],
+  "keywords": [
+    "remux",
+    "redux",
+    "reducer",
+    "state",
+    "immutable",
+    "immer",
+    "data"
+  ],
+  "author": "Trevor Smith <trevorlynnsmith@gmail.com>",
+  "main": "lib/remux.js",
+  "module": "es/remux.js",
+  "jsnext:main": "es/remux.js",
+  "scripts": {
+    "build": "npm run build:commonjs && npm run build:es",
+    "build:commonjs": "NODE_ENV=cjs rollup -c -o lib/remux.js",
+    "build:es": "BABEL_ENV=es NODE_ENV=es rollup -c -o es/remux.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "babel-eslint": "^8.2.6",
+    "prettier": "^1.14.2",
+    "rollup": "^0.64.1",
+    "rollup-plugin-babel": "4.0.0-beta.8",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^4.0.0"
+  },
+  "sideEffects": false
+}
