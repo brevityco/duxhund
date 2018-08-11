@@ -19,7 +19,7 @@
     "data"
   ],
   "author": "Trevor Smith <trevorlynnsmith@gmail.com>",
-  "main": "lib/remux.js",
+  "main": "src/index.js",
   "module": "es/remux.js",
   "jsnext:main": "es/remux.js",
   "scripts": {
