@@ -1,4 +1,13 @@
+import { assertType } from './utils/assertions'
+
 export default function createSelector(query) {
+  if (process.env.NODE_ENV !== 'production') {
+    assertType(query, 'string', {
+      funcName: createSelector,
+      argName: 'query',
+    })
+  }
+
   const { path, alias } = parseQuery(query)
 
   if (path.length === 1) {
@@ -14,14 +23,14 @@ export default function createSelector(query) {
   })
 }
 
-function parseQuery(query) {
+export function parseQuery(query) {
   let [path, alias] = query.split(/\s*->\s*/)
 
   return {
     alias,
     path: path
       .replace(/\[/g, '.')
-      .replace(/]/, '')
+      .replace(/]/g, '')
       .split('.')
       .filter(Boolean),
   }

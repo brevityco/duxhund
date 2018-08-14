@@ -1,20 +1,24 @@
 import { connect as reduxConnect } from 'react-redux'
 import defaultCreateSelector from './createSelector'
+import { assertType } from './utils/assertions'
 
 export default function createConnect({
-  mapDispatchToProps,
-  mergeProps,
   createSelector = defaultCreateSelector,
 } = {}) {
-  return function connect(...queries) {
-    let options
+  if (process.env.NODE_ENV !== 'production') {
+    const funcName = 'createConnect'
 
-    if (typeof queries[queries.length - 1] === 'object') {
-      options = queries.pop()
-    }
+    assertType(createSelector, 'function', {
+      funcName,
+      argName: 'createSelector',
+    })
+  }
 
-    if (Array.isArray(queries[0])) {
-      queries = queries[0]
+  return function connect(...args) {
+    let queries = args
+
+    if (Array.isArray(args[0])) {
+      queries = args.shift()
     }
 
     const selectors = [].concat.apply(
@@ -28,9 +32,7 @@ export default function createConnect({
           (props, selector) => Object.assign(props, selector(state, ownProps)),
           {}
         ),
-      mapDispatchToProps,
-      mergeProps,
-      options
+      ...args
     )
 
     return component => connector(component)

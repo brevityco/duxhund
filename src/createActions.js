@@ -1,50 +1,50 @@
-export default function createActions(
-  { dispatch },
-  { wrapAction = action => action }
-) {
-  return Object.defineProperties(
-    {},
-    {
-      add: {
-        value(type, handler) {
-          const creator = handler ? thunk : simple
-          return (this[type] = wrapAction(
-            (payload = {}) => dispatch(creator(type, payload, handler, this)),
-            type
-          ))
-        },
-      },
-      has: {
-        value(type) {
-          return Boolean(this[type])
-        },
-      },
-      delete: {
-        value(type) {
-          const action = this[type]
-          delete this[type]
-          return action
-        },
-      },
-    }
-  )
-}
+import { assertType, assertValuesType } from './utils/assertions'
+import createActionCreator from './createActionCreator'
 
-function simple(type, payload) {
-  return {
-    type,
-    payload,
-  }
-}
+export default function createActions(dispatch, options = {}) {
+  if (process.env.NODE_ENV !== 'production') {
+    const funcName = 'createActions'
 
-function thunk(type, payload, handler, actions) {
-  return function(dispatch, getState) {
-    return handler(payload, {
-      getState,
-      actions: {
-        ...actions,
-        self: (self = payload) => dispatch({ type, payload: self }),
-      },
+    assertType(dispatch, 'function', {
+      funcName,
+      argName: 'dispatch',
+    })
+
+    assertType(options, 'object', {
+      funcName,
+      argName: 'options',
+    })
+
+    assertType(options.wrapAction, 'function', {
+      funcName,
+      argName: 'options.wrapAction',
+      optional: true,
+    })
+
+    assertValuesType(options.reducers, 'function', {
+      funcName,
+      argName: 'options.reducers',
+      optional: true,
+    })
+
+    assertValuesType(options.actions, 'function', {
+      funcName,
+      argName: 'options.actions',
+      optional: true,
     })
   }
+
+  const { reducers = {}, actions = {} } = options
+  const handlers = {}
+  const createAction = createActionCreator(dispatch, options)
+
+  Object.keys(actions).forEach(
+    type => (handlers[type] = createAction(type, actions[type]))
+  )
+
+  Object.keys(reducers)
+    .filter(type => !handlers[type])
+    .forEach(type => (handlers[type] = createAction(type)))
+
+  return handlers
 }
