@@ -52,6 +52,40 @@ describe('createConnect', () => {
         expect(createSelector.mock.calls[2][0]).toBe('qux')
       })
 
+      it('ignores non-string queries in the rest arguments', () => {
+        const createSelector = jest.fn()
+        createConnect({ createSelector })('bar', 'baz', 123)
+        expect(createSelector.mock.calls.length).toBe(2)
+        expect(createSelector.mock.calls[0][0]).toBe('bar')
+      })
+
+      it('ignores non-string queries in the array argument', () => {
+        const createSelector = jest.fn()
+        createConnect({ createSelector })(['bar', 'baz', 123])
+        expect(createSelector.mock.calls.length).toBe(2)
+        expect(createSelector.mock.calls[0][0]).toBe('bar')
+      })
+
+      it('accepts redux connect options if queries is an array', () => {
+        const reduxConnect = jest.fn()
+        createConnect({ reduxConnect })(['bar', 'baz'], dispatch => ({
+          foo: dispatch,
+        }))
+        expect(reduxConnect.mock.calls.length).toBe(1)
+        expect(typeof reduxConnect.mock.calls[0][0]).toBe('function')
+        expect(typeof reduxConnect.mock.calls[0][1]).toBe('function')
+      })
+
+      it('does not accept redux connect options if queries is not an array', () => {
+        const reduxConnect = jest.fn()
+        createConnect({ reduxConnect })('bar', 'baz', dispatch => ({
+          foo: dispatch,
+        }))
+        expect(reduxConnect.mock.calls.length).toBe(1)
+        expect(typeof reduxConnect.mock.calls[0][0]).toBe('function')
+        expect(typeof reduxConnect.mock.calls[0][1]).toBe('undefined')
+      })
+
       it('decorates the supplied component with a redux Connector component', () => {
         const decorator = createConnect()()
         const component = decorator(() => {})
