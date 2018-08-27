@@ -8,6 +8,9 @@ export default function createStore({
   initialState = {},
   middleware = [],
 } = {}) {
+  // Make things easier for Webpack users with loose: true set.
+  delete reducers.__esModule
+
   if (process.env.NODE_ENV !== 'production') {
     const funcName = 'createStore'
 

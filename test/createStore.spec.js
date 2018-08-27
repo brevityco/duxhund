@@ -23,6 +23,18 @@ describe('createStore', () => {
     expect(handler.mock.calls.length).toBe(1)
   })
 
+  it('should not crate cerate create a redicer that handles actions with type __esModule', () => {
+    const store = createStore({
+      reducers: {
+        __esModule: true,
+      },
+    })
+
+    expect(() => store.dispatch({ type: '__esModule' })).toThrow(
+      /no reducer function with that name/
+    )
+  })
+
   it('uses the supplied initial state', () => {
     const store = createStore({
       initialState: {
