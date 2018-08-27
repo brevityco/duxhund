@@ -39,7 +39,7 @@ export default function createActionCreator(dispatch, options = {}) {
       })
     }
 
-    const creator = getActionCreatorForHandler(handler)
+    const { creator = getActionCreatorForHandler(handler) } = options
 
     return wrapAction(
       (payload = {}) => dispatch(creator(type, payload, handler, this)),

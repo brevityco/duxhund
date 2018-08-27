@@ -44,7 +44,7 @@ export default function createActions(dispatch, options = {}) {
 
   const { reducers = {}, actions = {} } = options
   const handlers = {}
-  const createAction = createActionCreator(dispatch, options)
+  const createAction = createActionCreator.call(handlers, dispatch, options)
 
   Object.keys(actions).forEach(
     type => (handlers[type] = createAction(type, actions[type]))

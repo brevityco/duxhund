@@ -36,6 +36,25 @@ describe('createActionCreator', () => {
       expect(typeof createAction('foo', () => {})).toBe('function')
     })
 
+    it('returns a function that creates an action with the correct arguments', () => {
+      const actions = {}
+      const payload = {}
+      const handler = () => {}
+
+      const creator = jest.fn()
+      const createAction = createActionCreator.call(actions, () => {}, {
+        creator,
+      })
+      const action = createAction('foo', handler)
+
+      action(payload)
+      expect(creator.mock.calls.length).toBe(1)
+      expect(creator.mock.calls[0][0]).toBe('foo')
+      expect(creator.mock.calls[0][1]).toBe(payload)
+      expect(creator.mock.calls[0][2]).toBe(handler)
+      expect(creator.mock.calls[0][3]).toBe(actions)
+    })
+
     it('throws an error if the first argument is not a string', () => {
       const createAction = createActionCreator(() => {})
       expect(() => createAction()).toThrow(/to be a string/)
