@@ -14,6 +14,9 @@ export default function createReducer(handlers = {}) {
     })
   }
 
+  // Make things easier for Webpack users with loose: true set.
+  delete handlers.__esModule
+
   return (state = {}, action) => {
     if (action) {
       const handler = handlers[action.type]

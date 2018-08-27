@@ -39,6 +39,20 @@ describe('createActions', () => {
     expect(typeof dispatch.mock.calls[0][0]).toBe('function')
   })
 
+  it('does not create an action for action types named __esModule', () => {
+    const dispatch = jest.fn()
+    const actions = { foo: () => {}, __esModule: true }
+    const result = createActions(dispatch, { actions })
+    expect(typeof result.__esModule).toBe('undefined')
+  })
+
+  it('does not create an action for reducer functions named __esModule', () => {
+    const dispatch = jest.fn()
+    const reducers = { baz: () => {}, __esModule: true }
+    const result = createActions(dispatch, { reducers })
+    expect(typeof result.__esModule).toBe('undefined')
+  })
+
   describe('arguments', () => {
     it('throws an error if the first argument is not a dispatch function', () => {
       expect(() => createActions(undefined)).toThrow(/to be a function/)
