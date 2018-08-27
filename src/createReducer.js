@@ -7,15 +7,17 @@ export default function createReducer(handlers = {}) {
       funcName: 'createReducer',
       argName: 'handlers',
     })
+  }
 
+  // Make things easier for Webpack users with loose: true set.
+  delete handlers.__esModule
+
+  if (process.env.NODE_ENV !== 'production') {
     assertValuesType(handlers, 'function', {
       funcName: 'createReducer',
       argName: 'handlers',
     })
   }
-
-  // Make things easier for Webpack users with loose: true set.
-  delete handlers.__esModule
 
   return (state = {}, action) => {
     if (action) {
