@@ -8,11 +8,7 @@
     "url": "github:brevityco/remux"
   },
   "bugs": "https://github.com/brevityco/remux/issues",
-  "files": [
-    "lib",
-    "es",
-    "src"
-  ],
+  "files": ["lib", "es", "src"],
   "keywords": [
     "remux",
     "redux",
@@ -34,7 +30,7 @@
     "format": "prettier --write \"{src,test}/**/*.js\"",
     "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
     "lint": "eslint src test",
-    "prepare": "yarn clean && yarn format:check && yarn lint && npm test && yarn build",
+    "prepublishOnly": "yarn clean && yarn format:check && yarn lint && npm test && yarn build",
     "test": "jest",
     "test:watch": "yarn test --watch",
     "test:cov": "yarn test --coverage"
