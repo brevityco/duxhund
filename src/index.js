@@ -5,7 +5,7 @@ import createReducer from './createReducer'
 import createSelector from './createSelector'
 import createStore from './createStore'
 
-export default function remux(options = {}) {
+export default function duxhund(options = {}) {
   const store = createStore(options)
   const connect = createConnect(options)
   const actions = createActions(store.dispatch, options)

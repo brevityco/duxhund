@@ -1,5 +1,5 @@
 /* eslint-disable import/no-duplicates */
-import remux from '../'
+import duxhund from '../'
 import * as rest from '../'
 import {
   createActionCreator,
@@ -14,11 +14,11 @@ import isPlainObject from '../src/utils/isPlainObject'
 
 describe('index.js', () => {
   it('has a function as the default export', () => {
-    expect(typeof remux).toBe('function')
+    expect(typeof duxhund).toBe('function')
   })
 
   it('exposes the public API', () => {
-    expect(rest.default).toBe(remux)
+    expect(rest.default).toBe(duxhund)
     expect(rest.createActionCreator).toBe(createActionCreator)
     expect(rest.createActions).toBe(createActions)
     expect(rest.createConnect).toBe(createConnect)
@@ -28,10 +28,10 @@ describe('index.js', () => {
   })
 
   it('returns a store, connect function, and actions set', () => {
-    expect(isPlainObject(remux())).toBe(true)
-    expect(Object.keys(remux()).length).toBe(3)
-    expect(isPlainObject(remux().store)).toBe(true)
-    expect(typeof remux().connect).toBe('function')
-    expect(isPlainObject(remux().actions)).toBe(true)
+    expect(isPlainObject(duxhund())).toBe(true)
+    expect(Object.keys(duxhund()).length).toBe(3)
+    expect(isPlainObject(duxhund().store)).toBe(true)
+    expect(typeof duxhund().connect).toBe('function')
+    expect(isPlainObject(duxhund().actions)).toBe(true)
   })
 })

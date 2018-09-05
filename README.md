@@ -1,11 +1,11 @@
-# Remux
+# Duxhund
 
 A opinionated and simplified interface for [Redux](https://redux.js.org/).
 
 ## Install
 
 ```
-yarn add remux
+yarn add duxhund
 ```
 
 Install these packages too, if you haven't already:
@@ -19,11 +19,11 @@ yarn add redux react-redux redux-thunk immer
 #### `data.js`
 
 ```js
-import remux from 'remux'
+import duxhund from 'duxhund'
 import * as actionHandlers from './actions'
 import * as reducerHandlers from './reducers'
 
-export const { store, connect, actions } = remux({
+export const { store, connect, actions } = duxhund({
   actions: actionHandlers,
   reducers: reducerHandlers,
   initialState: {
