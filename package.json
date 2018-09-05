@@ -64,6 +64,9 @@
     "yarn": "^1.9.4"
   },
   "jest": {
+    "moduleNameMapper": {
+      "^\\.\\./$": "<rootDir>/src"
+    },
     "testRegex": "(/test/.*\\.spec.js)$"
   },
   "peerDependencies": {},
