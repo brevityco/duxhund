@@ -41,14 +41,18 @@ describe('createActions', () => {
 
   it('does not create an action for action types named __esModule', () => {
     const dispatch = jest.fn()
-    const actions = { foo: () => {}, __esModule: true }
+    const actions = { foo: () => {} }
+    Object.defineProperty(actions, '__esModule', { value: true })
+
     const result = createActions(dispatch, { actions })
     expect(typeof result.__esModule).toBe('undefined')
   })
 
   it('does not create an action for reducer functions named __esModule', () => {
     const dispatch = jest.fn()
-    const reducers = { baz: () => {}, __esModule: true }
+    const reducers = { baz: () => {} }
+    Object.defineProperty(reducers, '__esModule', { value: true })
+
     const result = createActions(dispatch, { reducers })
     expect(typeof result.__esModule).toBe('undefined')
   })

@@ -23,11 +23,12 @@ describe('createStore', () => {
     expect(handler.mock.calls.length).toBe(1)
   })
 
-  it('should not crate cerate create a redicer that handles actions with type __esModule', () => {
+  it('should not create a reducer that handles actions with type __esModule', () => {
+    const reducers = {}
+    Object.defineProperty(reducers, '__esModule', { value: true })
+
     const store = createStore({
-      reducers: {
-        __esModule: true,
-      },
+      reducers,
     })
 
     expect(() => store.dispatch({ type: '__esModule' })).toThrow(

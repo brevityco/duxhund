@@ -16,10 +16,6 @@ export default function createActions(dispatch, options = {}) {
     })
   }
 
-  // Make things easier for Webpack users with loose: true set.
-  if (options.actions) delete options.actions.__esModule
-  if (options.reducers) delete options.reducers.__esModule
-
   if (process.env.NODE_ENV !== 'production') {
     const funcName = 'createActions'
 

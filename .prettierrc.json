@@ -1,7 +1,7 @@
 {
   "arrowParens": "avoid",
   "jsxBracketSameLine": true,
-  "parser": "babylon",
+  "parser": "babel",
   "printWidth": 80,
   "proseWrap": "preserve",
   "requirePragma": false,

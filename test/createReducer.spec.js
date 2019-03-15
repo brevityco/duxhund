@@ -23,7 +23,10 @@ describe('createReducer', () => {
     })
 
     it('should not handle actions with type __esModule', () => {
-      const reducer = createReducer({ __esModule: true })
+      const properties = {}
+      Object.defineProperty(properties, '__esModule', { value: true })
+
+      const reducer = createReducer(properties)
 
       expect(() => reducer({}, { type: '__esModule' })).toThrow(
         /no reducer function with that name/

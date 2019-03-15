@@ -90,7 +90,6 @@ describe('createConnect', () => {
         const decorator = createConnect()()
         const component = decorator(() => {})
         expect(component.name).toBe('Connect')
-        expect(component.length).toBe(2)
       })
     })
   })
